@@ -15,19 +15,45 @@ services:
         OLLAMA_BASE_URL: '/ollama'
       dockerfile: Dockerfile
     image: ghcr.io/open-webui/open-webui:${WEBUI_DOCKER_TAG-main}
-    container_name: open-webui
+    env_file:
+      - .env
+    container_name: Open-WebUi
     volumes:
       - open-webui:/app/backend/data
     depends_on:
       - ollama
     ports:
-      - ${OPEN_WEBUI_PORT-3000}:8080
+      - "4000:8080"
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
       - 'WEBUI_SECRET_KEY='
+      -  USE_OLLAMA_DOCKER=true
+      -  USE_CUDA_DOCKER=false
+      -  PORT=${OPEN_WEBUI_PORT}
+      -  HOST=${OPEN_WEBUI_HOST}
+      -  WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - 'WEBUI_AUTH_TRUSTED_EMAIL_HEADER=X-Forwarded-Email'
+      - 'WEBUI_AUTH_TRUSTED_NAME_HEADER=X-Forwarded-User'
+      -  DATABASE_URL=
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+
+  oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy:v7.6.0
+    env_file:
+      - .env
+    environment:
+      OAUTH2_PROXY_HTTP_ADDRESS: 0.0.0.0:4180
+      OAUTH2_PROXY_UPSTREAMS: ${OAUTH2_PROXY_UPSTREAMS}
+      OAUTH2_PROXY_PROVIDER: google
+      OAUTH2_PROXY_CLIENT_ID: ${OAUTH2_PROXY_CLIENT_ID}
+      OAUTH2_PROXY_CLIENT_SECRET: ${OAUTH2_PROXY_CLIENT_SECRET}
+      OAUTH2_PROXY_REDIRECT_URL: ${OAUTH2_PROXY_REDIRECT_URL}
+      OAUTH2_PROXY_COOKIE_SECURE: "false"
+    restart: unless-stopped
+    ports:
+      - 4180:4180/tcp
 
 volumes:
   ollama: {}
