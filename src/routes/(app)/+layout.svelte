@@ -182,7 +182,9 @@
 	});
 </script>
 
-<SettingsModal bind:show={$showSettings} />
+{#if $user?.role === 'admin'}
+	<SettingsModal bind:show={$showSettings} />
+{/if}
 <ChangelogModal bind:show={$showChangelog} />
 
 <div class="app relative">

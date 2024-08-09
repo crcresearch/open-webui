@@ -12,6 +12,7 @@
 
 	export let selectedModels = [''];
 	export let disabled = false;
+	export let preselectedModel: any = [];
 
 	export let showSetDefault = true;
 
@@ -36,16 +37,22 @@
 		}
 
 		const spectrumXGptModel = $models.filter(model => model.id == 'spectrumx').map(model => model.id);
-		const preSelcetedRandomModel = [$models[Math.floor(Math.random() * $models.length)].id]
+		// let preSelcetedRandomModel = [$models[Math.floor(Math.random() * $models.length)].id]
+		let preSelcetedRandomModel = $models[Math.floor(Math.random() * $models.length)].id
 		console.log('preSelcetedRandomModel: ',preSelcetedRandomModel)
 
 		if(spectrumXGptModel)
 		{
+			preselectedModel = spectrumXGptModel
+			console.log('preselectedModel: ',preselectedModel)
 			settings.set({ ...$settings, models: spectrumXGptModel });
 			await updateUserSettings(localStorage.token, { ui: $settings });
 		}
 		else
 		{
+			preselectedModel = preSelcetedRandomModel
+			console.log('preselectedModel: ',preselectedModel)
+			console.log('preSelcetedRandomModel: ',preSelcetedRandomModel)
 			settings.set({ ...$settings, models: preSelcetedRandomModel });
 			await updateUserSettings(localStorage.token, { ui: $settings });
 		}
@@ -134,7 +141,8 @@
 		<div class="flex w-full max-w-fit">
 			<div class="overflow-hidden w-full">
 				<div class="mr-1 max-w-full">
-					{$i18n.t('Wah Gwan')}
+					{$i18n.t('Model: ')}
+					{preselectedModel}
 				</div>
 			</div>
 		</div>
