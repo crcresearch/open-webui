@@ -21,11 +21,40 @@
 			toast.error($i18n.t('Choose a model before saving...'));
 			return;
 		}
+		
 		settings.set({ ...$settings, models: selectedModels });
+		console.log('selectedModels: ',selectedModels)
 		await updateUserSettings(localStorage.token, { ui: $settings });
 
 		toast.success($i18n.t('Default model updated'));
 	};
+
+	const setModel = async () => {
+		if ($models.length == 0) {
+			toast.error($i18n.t('No models available...'));
+			return;
+		}
+
+		const spectrumXGptModel = $models.filter(model => model.id == 'spectrumx').map(model => model.id);
+		const preSelcetedRandomModel = [$models[Math.floor(Math.random() * $models.length)].id]
+		console.log('preSelcetedRandomModel: ',preSelcetedRandomModel)
+
+		if(spectrumXGptModel)
+		{
+			settings.set({ ...$settings, models: spectrumXGptModel });
+			await updateUserSettings(localStorage.token, { ui: $settings });
+		}
+		else
+		{
+			settings.set({ ...$settings, models: preSelcetedRandomModel });
+			await updateUserSettings(localStorage.token, { ui: $settings });
+		}
+
+	};
+
+	onMount(async () => {
+		setModel();
+	});
 
 	$: if (selectedModels.length > 0 && $models.length > 0) {
 		selectedModels = selectedModels.map((model) =>
@@ -35,74 +64,87 @@
 </script>
 
 <div class="flex flex-col w-full items-start">
-	{#each selectedModels as selectedModel, selectedModelIdx}
+	{#if $user?.role === 'admin'}
+		{#each selectedModels as selectedModel, selectedModelIdx}
+			<div class="flex w-full max-w-fit">
+				<div class="overflow-hidden w-full">
+					<div class="mr-1 max-w-full">
+						<Selector
+							placeholder={$i18n.t('Select a model')}
+							items={$models.map((model) => ({
+								value: model.id,
+								label: model.name,
+								model: model
+							}))}
+							bind:value={selectedModel}
+						/>
+					</div>
+				</div>
+
+				{#if selectedModelIdx === 0}
+					<div class="  self-center mr-2 disabled:text-gray-600 disabled:hover:text-gray-600">
+						<Tooltip content={$i18n.t('Add Model')}>
+							<button
+								class=" "
+								{disabled}
+								on:click={() => {
+									selectedModels = [...selectedModels, ''];
+								}}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="2"
+									stroke="currentColor"
+									class="size-3.5"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+								</svg>
+							</button>
+						</Tooltip>
+					</div>
+				{:else}
+					<div class="  self-center disabled:text-gray-600 disabled:hover:text-gray-600 mr-2">
+						<Tooltip content={$i18n.t('Remove Model')}>
+							<button
+								{disabled}
+								on:click={() => {
+									selectedModels.splice(selectedModelIdx, 1);
+									selectedModels = selectedModels;
+								}}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="2"
+									stroke="currentColor"
+									class="size-3.5"
+								>
+									<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
+								</svg>
+							</button>
+						</Tooltip>
+					</div>
+				{/if}
+			</div>
+		{/each}
+	{:else}
 		<div class="flex w-full max-w-fit">
 			<div class="overflow-hidden w-full">
 				<div class="mr-1 max-w-full">
-					<Selector
-						placeholder={$i18n.t('Select a model')}
-						items={$models.map((model) => ({
-							value: model.id,
-							label: model.name,
-							model: model
-						}))}
-						bind:value={selectedModel}
-					/>
+					{$i18n.t('Wah Gwan')}
 				</div>
 			</div>
-
-			{#if selectedModelIdx === 0}
-				<div class="  self-center mr-2 disabled:text-gray-600 disabled:hover:text-gray-600">
-					<Tooltip content={$i18n.t('Add Model')}>
-						<button
-							class=" "
-							{disabled}
-							on:click={() => {
-								selectedModels = [...selectedModels, ''];
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="2"
-								stroke="currentColor"
-								class="size-3.5"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-							</svg>
-						</button>
-					</Tooltip>
-				</div>
-			{:else}
-				<div class="  self-center disabled:text-gray-600 disabled:hover:text-gray-600 mr-2">
-					<Tooltip content={$i18n.t('Remove Model')}>
-						<button
-							{disabled}
-							on:click={() => {
-								selectedModels.splice(selectedModelIdx, 1);
-								selectedModels = selectedModels;
-							}}
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								stroke-width="2"
-								stroke="currentColor"
-								class="size-3.5"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />
-							</svg>
-						</button>
-					</Tooltip>
-				</div>
-			{/if}
 		</div>
-	{/each}
+	{/if}
+
+
 </div>
 
-{#if showSetDefault && !$mobile}
+
+{#if $user?.role === 'admin' && showSetDefault && !$mobile}
 	<div class="text-left mt-0.5 ml-1 text-[0.7rem] text-gray-500 font-primary">
 		<button on:click={saveDefaultModel}> {$i18n.t('Set as default')}</button>
 	</div>
