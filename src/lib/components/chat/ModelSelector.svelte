@@ -37,23 +37,21 @@
 		}
 
 		const spectrumXGptModel = $models.filter(model => model.id == 'spectrumx').map(model => model.id);
-		// let preSelcetedRandomModel = [$models[Math.floor(Math.random() * $models.length)].id]
 		let preSelcetedRandomModel = $models[Math.floor(Math.random() * $models.length)].id
-		console.log('preSelcetedRandomModel: ',preSelcetedRandomModel)
 
-		if(spectrumXGptModel)
+		if(spectrumXGptModel.length > 0)
 		{
 			preselectedModel = spectrumXGptModel
-			console.log('preselectedModel: ',preselectedModel)
+			// console.log('preselectedModel: ',preselectedModel)
 			settings.set({ ...$settings, models: spectrumXGptModel });
 			await updateUserSettings(localStorage.token, { ui: $settings });
 		}
 		else
 		{
 			preselectedModel = preSelcetedRandomModel
-			console.log('preselectedModel: ',preselectedModel)
-			console.log('preSelcetedRandomModel: ',preSelcetedRandomModel)
-			settings.set({ ...$settings, models: preSelcetedRandomModel });
+			// console.log('preselectedModel : ',preselectedModel)
+			// console.log('preSelcetedRandomModel nani: ',[preSelcetedRandomModel])
+			settings.set({ ...$settings, models: [preSelcetedRandomModel] });
 			await updateUserSettings(localStorage.token, { ui: $settings });
 		}
 
