@@ -58,6 +58,7 @@ export const updateUserPermissions = async (token: string, permissions: object) 
 	return res;
 };
 
+
 export const updateUserRole = async (token: string, id: string, role: string) => {
 	let error = null;
 
