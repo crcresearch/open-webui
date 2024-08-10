@@ -296,8 +296,13 @@
 							? 'brightness-90 dark:brightness-50'
 							: ''} "
 					>
-						<img
+						<!-- <img
 							src={model?.info?.meta?.profile_image_url ?? '/static/favicon.png'}
+							alt="modelfile profile"
+							class=" rounded-full w-full h-auto object-cover"
+						/> -->
+						<img
+							src={model?.info?.meta?.profile_image_url ?? '/SpectrumX_Favicon.png'}
 							alt="modelfile profile"
 							class=" rounded-full w-full h-auto object-cover"
 						/>

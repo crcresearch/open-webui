@@ -395,11 +395,14 @@
 		id="message-{message.id}"
 		dir={$settings.chatDirection}
 	>
-		<ProfileImage
+		<!-- <ProfileImage
 			src={model?.info?.meta?.profile_image_url ??
 				($i18n.language === 'dg-DG' ? `/doge.png` : `${WEBUI_BASE_URL}/static/favicon.png`)}
+		/> -->
+		<ProfileImage
+			src={model?.info?.meta?.profile_image_url ??
+				($i18n.language === 'dg-DG' ? `/doge.png` : `/SpectrumX_Favicon.png`)}
 		/>
-
 		<div class="w-full overflow-hidden pl-1">
 			<Name>
 				{model?.name ?? message.model}

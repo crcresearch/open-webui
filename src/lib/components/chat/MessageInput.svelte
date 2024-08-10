@@ -378,7 +378,7 @@
 						class="px-3 py-2.5 text-left w-full flex justify-between items-center absolute bottom-0 left-0 right-0 bg-gradient-to-t from-50% from-white dark:from-gray-900"
 					>
 						<div class="flex items-center gap-2 text-sm dark:text-gray-500">
-							<img
+							<!-- <img
 								crossorigin="anonymous"
 								alt="model profile"
 								class="size-5 max-w-[28px] object-cover rounded-full"
@@ -387,6 +387,12 @@
 									($i18n.language === 'dg-DG'
 										? `/doge.png`
 										: `${WEBUI_BASE_URL}/static/favicon.png`)}
+							/> -->
+							<img
+								crossorigin="anonymous"
+								alt="model profile"
+								class="size-5 max-w-[28px] object-cover rounded-full"
+								src={'/SpectrumX_Favicon.png'}
 							/>
 							<div>
 								Talking to <span class=" font-medium">{atSelectedModel.name}</span>

@@ -654,7 +654,7 @@
 								/><circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" /></svg
 							>
 						{:else}
-							<div
+							<!-- <div
 								class=" {rmsLevel * 100 > 4
 									? ' size-[4.5rem]'
 									: rmsLevel * 100 > 2
@@ -669,7 +669,23 @@
 								'/static/favicon.png'
 									? `background-image: url('${model?.info?.meta?.profile_image_url}');`
 									: ''}
-							/>
+							/> -->
+							<div
+							class=" {rmsLevel * 100 > 4
+								? ' size-[4.5rem]'
+								: rmsLevel * 100 > 2
+								? ' size-16'
+								: rmsLevel * 100 > 1
+								? 'size-14'
+								: 'size-12'}  transition-all rounded-full {(model?.info?.meta
+								?.profile_image_url ?? '/SpectrumX_Favicon.png') !== '/SpectrumX_Favicon.png'
+								? ' bg-cover bg-center bg-no-repeat'
+								: 'bg-black dark:bg-white'}  bg-black dark:bg-white"
+							style={(model?.info?.meta?.profile_image_url ?? '/SpectrumX_Favicon.png') !==
+							'/SpectrumX_Favicon.png'
+								? `background-image: url('${model?.info?.meta?.profile_image_url}');`
+								: ''}
+						/>
 						{/if}
 						<!-- navbar -->
 					</button>
@@ -736,7 +752,7 @@
 									/><circle class="spinner_qM83 spinner_ZTLf" cx="20" cy="12" r="3" /></svg
 								>
 							{:else}
-								<div
+								<!-- <div
 									class=" {rmsLevel * 100 > 4
 										? ' size-52'
 										: rmsLevel * 100 > 2
@@ -751,7 +767,24 @@
 									'/static/favicon.png'
 										? `background-image: url('${model?.info?.meta?.profile_image_url}');`
 										: ''}
-								/>
+								/> -->
+								<div
+								class=" {rmsLevel * 100 > 4
+									? ' size-52'
+									: rmsLevel * 100 > 2
+									? 'size-48'
+									: rmsLevel * 100 > 1
+									? 'size-[11.5rem]'
+									: 'size-44'}  transition-all rounded-full {(model?.info?.meta
+									?.profile_image_url ?? '//SpectrumX_Favicon.png') !== '//SpectrumX_Favicon.png'
+									? ' bg-cover bg-center bg-no-repeat'
+									: 'bg-black dark:bg-white'} "
+								style={(model?.info?.meta?.profile_image_url ?? '//SpectrumX_Favicon.png') !==
+								'//SpectrumX_Favicon.png'
+									? `background-image: url('${model?.info?.meta?.profile_image_url}');`
+									: ''}
+							/>
+								
 							{/if}
 						</button>
 					{:else}

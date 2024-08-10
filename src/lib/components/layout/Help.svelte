@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { onMount, tick, getContext } from 'svelte';
+	import {user} from '$lib/stores';
 
 	const i18n = getContext('i18n');
 
 	import ShortcutsModal from '../chat/ShortcutsModal.svelte';
 	import Tooltip from '../common/Tooltip.svelte';
 	import HelpMenu from './Help/HelpMenu.svelte';
+
 
 	let showShortcuts = false;
 </script>
@@ -19,22 +21,24 @@
 		}}
 	/>
 
-	<HelpMenu
-		showDocsHandler={() => {
-			showShortcuts = !showShortcuts;
-		}}
-		showShortcutsHandler={() => {
-			showShortcuts = !showShortcuts;
-		}}
-	>
-		<Tooltip content={$i18n.t('Help')} placement="left">
-			<button
-				class="text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full"
-			>
-				?
-			</button>
-		</Tooltip>
-	</HelpMenu>
+	{#if $user?.role === 'admin'}
+		<HelpMenu
+			showDocsHandler={() => {
+				showShortcuts = !showShortcuts;
+			}}
+			showShortcutsHandler={() => {
+				showShortcuts = !showShortcuts;
+			}}
+		>
+			<Tooltip content={$i18n.t('Help')} placement="left">
+				<button
+					class="text-gray-600 dark:text-gray-300 bg-gray-300/20 size-5 flex items-center justify-center text-[0.7rem] rounded-full"
+				>
+					?
+				</button>
+			</Tooltip>
+		</HelpMenu>
+	{/if}
 </div>
 
 <ShortcutsModal bind:show={showShortcuts} />

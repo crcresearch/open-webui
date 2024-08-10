@@ -106,7 +106,7 @@
 
 		<hr class=" dark:border-gray-850" />
 
-		<div class="flex space-x-1">
+		<!-- <div class="flex space-x-1">
 			<a href="https://discord.gg/5rJgQTnV4s" target="_blank">
 				<img
 					alt="Discord"
@@ -127,7 +127,7 @@
 					src="https://img.shields.io/github/stars/open-webui/open-webui?style=social&label=Star us on Github"
 				/>
 			</a>
-		</div>
+		</div> -->
 
 		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
 			{#if !$WEBUI_NAME.includes('Open WebUI')}
@@ -138,6 +138,18 @@
 				class=" text-gray-500 dark:text-gray-300 font-medium"
 				href="https://github.com/tjbck"
 				target="_blank">Timothy J. Baek</a
+			>
+		</div>
+
+		<hr class=" dark:border-gray-850" />
+
+		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
+			<img
+				crossorigin="anonymous"
+				src={'/crc_logo.png'}
+				class=" size-[2.7rem] rounded-full border-[1px] border-gray-200 dark:border-none"
+				alt="logo"
+				draggable="false"
 			>
 		</div>
 	</div>

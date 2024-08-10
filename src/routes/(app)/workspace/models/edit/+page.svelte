@@ -46,7 +46,8 @@
 		base_model_id: null,
 		name: '',
 		meta: {
-			profile_image_url: '/static/favicon.png',
+			// profile_image_url: '/static/favicon.png',
+			profile_image_url: '/SpectrumX_Favicon.png',
 			description: '',
 			suggestion_prompts: null,
 			tags: []
