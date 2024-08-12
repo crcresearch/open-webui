@@ -106,28 +106,28 @@
 
 		<hr class=" dark:border-gray-850" />
 
-		<!-- <div class="flex space-x-1">
-			<a href="https://discord.gg/5rJgQTnV4s" target="_blank">
-				<img
+		<div class="flex space-x-1">
+			<a href="https://www.linkedin.com/company/spectrumx-center" target="_blank">
+				<!-- <img
 					alt="Discord"
-					src="https://img.shields.io/badge/Discord-Open_WebUI-blue?logo=discord&logoColor=white"
-				/>
+					src="https://img.shields.io/linkedin"
+				/> -->
 			</a>
 
-			<a href="https://twitter.com/OpenWebUI" target="_blank">
+			<a href="https://twitter.com/SpectrumXCenter" target="_blank">
 				<img
 					alt="X (formerly Twitter) Follow"
-					src="https://img.shields.io/twitter/follow/OpenWebUI"
+					src="https://img.shields.io/twitter/follow/SpectrumXCenter"
 				/>
 			</a>
 
-			<a href="https://github.com/open-webui/open-webui" target="_blank">
+			<!-- <a href="https://github.com/open-webui/open-webui" target="_blank">
 				<img
 					alt="Github Repo"
 					src="https://img.shields.io/github/stars/open-webui/open-webui?style=social&label=Star us on Github"
 				/>
-			</a>
-		</div> -->
+			</a> -->
+		</div> 
 
 		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
 			{#if !$WEBUI_NAME.includes('Open WebUI')}
@@ -143,14 +143,27 @@
 
 		<hr class=" dark:border-gray-850" />
 
-		<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
-			<img
-				crossorigin="anonymous"
-				src={'/crc_logo.png'}
-				class=" size-[2.7rem] rounded-full border-[1px] border-gray-200 dark:border-none"
-				alt="logo"
-				draggable="false"
-			>
+		<div class="flex items-center space-x-4">
+			<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
+				<img
+					crossorigin="anonymous"
+					src={'/SpectrumX_Social.png'}
+					class=" size-[2.7rem] border-[1px] border-gray-200 dark:border-none"
+					alt="spectrumx"
+					draggable="false"
+				>
+				
+			</div>
+
+			<div class="mt-2 text-xs text-gray-400 dark:text-gray-500">
+				<img
+					crossorigin="anonymous"
+					src={'/crc_logo.png'}
+					class=" size-[2.7rem] rounded-full border-[1px] border-white-200 dark:border-none"
+					alt="crc"
+					draggable="false"
+				>
+			</div>
 		</div>
 	</div>
 </div>

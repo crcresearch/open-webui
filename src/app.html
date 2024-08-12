@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<!-- <link rel="icon" href="%sveltekit.assets%/favicon.png" /> -->
-		<link rel="icon" href="%sveltekit.assets%//SpectrumX_Favicon.png" />
+		<link rel="icon" src="/SpectrumX_Favicon.png" />
 		<link rel="manifest" href="%sveltekit.assets%/manifest.json" crossorigin="use-credentials" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 		<meta name="robots" content="noindex,nofollow" />
@@ -80,7 +80,7 @@
 				}
 			</style>
 
-			<img
+			<!-- <img
 				id="logo"
 				style="
 					position: absolute;
@@ -91,6 +91,19 @@
 					transform: translateX(-50%);
 				"
 				src="/static/splash.png"
+			/> -->
+
+			<img
+				id="logo"
+				style="
+					position: absolute;
+					width: auto;
+					height: 6rem;
+					top: 44%;
+					left: 50%;
+					transform: translateX(-50%);
+				"
+				src="/spectrumx_splash.png"
 			/>
 
 			<div
@@ -107,10 +120,16 @@
 					align-items: center;
 				"
 			>
-				<img
+				<!-- <img
 					id="logo-her"
 					style="width: auto; height: 13rem"
 					src="/static/splash.png"
+					class="animate-pulse-fast"
+				/> -->
+				<img
+					id="logo-her"
+					style="width: auto; height: 13rem"
+					src="/spectrumx_splash.png"
 					class="animate-pulse-fast"
 				/>
 
