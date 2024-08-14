@@ -133,11 +133,11 @@
 			{#if !$WEBUI_NAME.includes('Open WebUI')}
 				<span class=" text-gray-500 dark:text-gray-300 font-medium">{$WEBUI_NAME}</span> -
 			{/if}
-			{$i18n.t('Created by')}
+			{$i18n.t('Modified for SpectrumX by University of Notre Dame Center for Research Computing')}
 			<a
 				class=" text-gray-500 dark:text-gray-300 font-medium"
-				href="https://github.com/tjbck"
-				target="_blank">Timothy J. Baek</a
+				href="https://www.spectrumx.org/"
+				target="_blank">SpectrumX</a
 			>
 		</div>
 

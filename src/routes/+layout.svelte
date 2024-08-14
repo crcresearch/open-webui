@@ -41,7 +41,13 @@
 	let wakeLock = null;
 
 	onMount(async () => {
-		theme.set(localStorage.theme);
+		console.log('At Layout Before: ',localStorage.theme)
+		if(!localStorage.theme)
+			theme.set('light');
+		else{
+			theme.set(localStorage.theme);
+		}
+		console.log('At Layout After: ',localStorage.theme)
 
 		mobile.set(window.innerWidth < BREAKPOINT);
 		const onResize = () => {

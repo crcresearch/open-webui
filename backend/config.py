@@ -475,7 +475,7 @@ else:
 # CUSTOM_NAME
 ####################################
 
-CUSTOM_NAME = os.environ.get("CUSTOM_NAME", "")
+CUSTOM_NAME = os.environ.get("CUSTOM_NAME", "SpectrumX")
 
 if CUSTOM_NAME:
     try:
@@ -1355,7 +1355,10 @@ AUDIO_TTS_VOICE = PersistentConfig(
 ####################################
 
 DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DATA_DIR}/webui.db")
+# DATABASE_URL = os.environ.get("DATABASE_URL", ""),
 
 # Replace the postgres:// with postgresql://
 if "postgres://" in DATABASE_URL:
+# if "postgresql://" in DATABASE_URL:
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
+    

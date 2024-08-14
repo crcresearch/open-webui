@@ -15,7 +15,7 @@
 
 	// General
 	let themes = ['dark', 'light', 'rose-pine dark', 'rose-pine-dawn light', 'oled-dark'];
-	let selectedTheme = 'system';
+	let selectedTheme = 'light';
 
 	let languages = [];
 	let lang = $i18n.language;
@@ -73,7 +73,7 @@
 	};
 
 	onMount(async () => {
-		selectedTheme = localStorage.theme ?? 'system';
+		selectedTheme = localStorage.theme ?? 'light';
 
 		languages = await getLanguages();
 
@@ -180,7 +180,7 @@
 						href="https://github.com/open-webui/open-webui/blob/main/docs/CONTRIBUTING.md#-translations-and-internationalization"
 						target="_blank"
 					>
-						Help us translate Open WebUI!
+						Help us translate SpectrumX!
 					</a>
 				</div>
 			{/if}

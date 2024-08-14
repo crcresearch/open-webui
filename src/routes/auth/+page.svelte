@@ -17,6 +17,7 @@
 	let name = '';
 	let email = '';
 	let password = '';
+	let reveal = false;
 
 	const setSessionUser = async (sessionUser) => {
 		if (sessionUser) {
@@ -84,6 +85,22 @@
 		await setSessionUser(sessionUser);
 	};
 
+	const revealFun=()=>{
+		if(reveal == false)
+		{
+			reveal = true
+			return
+		}else if(reveal == true)
+		{
+			reveal = false
+			return
+		}else
+		{
+			reveal = false
+		}
+
+	}
+
 	onMount(async () => {
 		if ($user !== undefined) {
 			await goto('/');
@@ -103,26 +120,22 @@
 </svelte:head>
 
 {#if loaded}
-	<div class="fixed m-10 z-50">
-		<div class="flex space-x-2">
+	<div class="fixed m-10 z-50 ">
+		<!-- <div class="flex space-x-2">
 			<div class=" self-center">
-				<!-- <img
-					crossorigin="anonymous"
-					src="{WEBUI_BASE_URL}/static/favicon.png"
-					class=" w-8 rounded-full"
-					alt="logo"
-				/> -->
 				<img
 					crossorigin="anonymous"
-					src="/SpectrumX_Favicon.png"
+					src="/SpectrumX_Fullcolor_Rev.png"
 					class=" w-8 rounded-full"
 					alt="logo"
 				/>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
-	<div class=" bg-white dark:bg-gray-950 min-h-screen w-full flex justify-center font-primary">
+	<!-- <div class=" bg-white dark:bg-gray-950 min-h-screen w-full flex justify-center font-primary"> -->
+	<div class="relative">
+	<div class="background-img-div w-full h-full bg-cover">
 		<!-- <div class="hidden lg:flex lg:flex-1 px-10 md:px-16 w-full bg-yellow-50 justify-center">
 			<div class=" my-auto pb-16 text-left">
 				<div>
@@ -143,11 +156,11 @@
 					<div
 						class="flex items-center justify-center gap-3 text-xl sm:text-2xl text-center font-semibold dark:text-gray-200"
 					>
-						<div>
+						<!-- <div>
 							{$i18n.t('Signing in')}
-							{$i18n.t('to')}
+							{$i18n.t('to SpectrumX')}
 							{$WEBUI_NAME}
-						</div>
+						</div> -->
 
 						<div>
 							<Spinner />
@@ -156,116 +169,127 @@
 				</div>
 			{:else}
 				<div class="  my-auto pb-10 w-full dark:text-gray-100">
-					<form
-						class=" flex flex-col justify-center"
-						on:submit|preventDefault={() => {
-							submitHandler();
-						}}
-					>
-						<div class="mb-1">
-							<div class=" text-2xl font-medium">
-								{mode === 'signin' ? $i18n.t('Sign in') : $i18n.t('Sign up')}
-								{$i18n.t('to')}
-								{$WEBUI_NAME}
+				<div>
+					{#if reveal}
+						<form
+							class=" flex flex-col justify-center"
+							on:submit|preventDefault={() => {
+								submitHandler();
+							}}
+						>
+							<div class="mb-1">
+								<div class=" text-2xl font-medium">
+									{mode === 'signin' ? $i18n.t('Sign in') : $i18n.t('Sign up')}
+									{$i18n.t('to SpectrumX')}
+									{$WEBUI_NAME}
+								</div>
+
+								{#if mode === 'signup'}
+									<div class=" mt-1 text-xs font-medium text-gray-500">
+										ⓘ {$WEBUI_NAME}
+										{'SpectrumX'}
+										{$i18n.t(
+											'does not make any external connections, and your data stays securely on your locally hosted server.'
+										)}
+									</div>
+								{/if}
 							</div>
 
-							{#if mode === 'signup'}
-								<div class=" mt-1 text-xs font-medium text-gray-500">
-									ⓘ {$WEBUI_NAME}
-									{$i18n.t(
-										'does not make any external connections, and your data stays securely on your locally hosted server.'
-									)}
-								</div>
-							{/if}
-						</div>
+							<div class="flex flex-col mt-4">
+								{#if mode === 'signup'}
+									<div>
+										<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Name')}</div>
+										<input
+											bind:value={name}
+											type="text"
+											class=" px-5 py-3 rounded-2xl w-full text-sm outline-none border dark:border-none dark:bg-gray-900"
+											autocomplete="name"
+											placeholder={$i18n.t('Enter Your Full Name')}
+											required
+										/>
+									</div>
 
-						<div class="flex flex-col mt-4">
-							{#if mode === 'signup'}
-								<div>
-									<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Name')}</div>
+									<hr class=" my-3 dark:border-gray-900" />
+								{/if}
+
+								<div class="mb-2">
+									<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Email')}</div>
 									<input
-										bind:value={name}
-										type="text"
+										bind:value={email}
+										type="email"
 										class=" px-5 py-3 rounded-2xl w-full text-sm outline-none border dark:border-none dark:bg-gray-900"
-										autocomplete="name"
-										placeholder={$i18n.t('Enter Your Full Name')}
+										autocomplete="email"
+										placeholder={$i18n.t('Enter Your Email')}
 										required
 									/>
 								</div>
 
-								<hr class=" my-3 dark:border-gray-900" />
-							{/if}
+								<div>
+									<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Password')}</div>
 
-							<div class="mb-2">
-								<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Email')}</div>
-								<input
-									bind:value={email}
-									type="email"
-									class=" px-5 py-3 rounded-2xl w-full text-sm outline-none border dark:border-none dark:bg-gray-900"
-									autocomplete="email"
-									placeholder={$i18n.t('Enter Your Email')}
-									required
-								/>
-							</div>
-
-							<div>
-								<div class=" text-sm font-medium text-left mb-1">{$i18n.t('Password')}</div>
-
-								<input
-									bind:value={password}
-									type="password"
-									class=" px-5 py-3 rounded-2xl w-full text-sm outline-none border dark:border-none dark:bg-gray-900"
-									placeholder={$i18n.t('Enter Your Password')}
-									autocomplete="current-password"
-									required
-								/>
-							</div>
-						</div>
-
-						<div class="mt-5">
-							<button
-								class=" bg-gray-900 hover:bg-gray-800 w-full rounded-2xl text-white font-medium text-sm py-3 transition"
-								type="submit"
-							>
-								{mode === 'signin' ? $i18n.t('Sign in') : $i18n.t('Create Account')}
-							</button>
-
-							{#if $config?.features.enable_signup}
-								<div class=" mt-4 text-sm text-center">
-									{mode === 'signin'
-										? $i18n.t("Don't have an account?")
-										: $i18n.t('Already have an account?')}
-
-									<button
-										class=" font-medium underline"
-										type="button"
-										on:click={() => {
-											if (mode === 'signin') {
-												mode = 'signup';
-											} else {
-												mode = 'signin';
-											}
-										}}
-									>
-										{mode === 'signin' ? $i18n.t('Sign up') : $i18n.t('Sign in')}
-									</button>
+									<input
+										bind:value={password}
+										type="password"
+										class=" px-5 py-3 rounded-2xl w-full text-sm outline-none border dark:border-none dark:bg-gray-900"
+										placeholder={$i18n.t('Enter Your Password')}
+										autocomplete="current-password"
+										required
+									/>
 								</div>
-							{/if}
-						</div>
-					</form>
+							</div>
+
+							<div class="mt-5">
+								<button
+									class=" bg-gray-900 hover:bg-gray-800 w-full rounded-2xl text-white font-medium text-sm py-3 transition"
+									type="submit"
+								>
+									{mode === 'signin' ? $i18n.t('Sign in') : $i18n.t('Create Account')}
+								</button>
+
+								{#if $config?.features.enable_signup}
+									<div class=" mt-4 text-sm text-center">
+										{mode === 'signin'
+											? $i18n.t("Don't have an account?")
+											: $i18n.t('Already have an account?')}
+
+										<button
+											class=" font-medium underline"
+											type="button"
+											on:click={() => {
+												if (mode === 'signin') {
+													mode = 'signup';
+												} else {
+													mode = 'signin';
+												}
+											}}
+										>
+											{mode === 'signin' ? $i18n.t('Sign up') : $i18n.t('Sign in')}
+										</button>
+									</div>
+								{/if}
+							</div>
+						</form>
+						{/if}
+					</div>
 
 					{#if Object.keys($config?.oauth?.providers ?? {}).length > 0}
-						<div class="inline-flex items-center justify-center w-full">
-							<hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-							<span
-								class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-950"
-								>{$i18n.t('or')}</span
-							>
-						</div>
-						<div class="flex flex-col space-y-2">
+						<!-- <div>
+							{#if reveal}
+								<div class="inline-flex items-center justify-center w-full">
+								<hr class="w-64 h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
+								<span
+									class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-950"
+									>{$i18n.t('or')}</span
+								>
+								</div>
+							{/if}
+						</div> -->
+
+						
+						<div class="absolute inset-x-0 bottom-13 flex flex-col max-w-md mx-auto items-center space-y-2">
 							{#if $config?.oauth?.providers?.google}
 								<button
-									class="flex items-center px-6 border-2 dark:border-gray-800 duration-300 dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 w-full rounded-2xl dark:text-white text-sm py-3 transition"
+									class="flex max-w-xs items-center px-6 border-2 dark:border-gray-800 duration-300 bg-white light:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 w-full rounded-2xl dark:text-white text-sm py-3 transition"
 									on:click={() => {
 										window.location.href = `${WEBUI_BASE_URL}/oauth/google/login`;
 									}}
@@ -286,6 +310,12 @@
 										/><path fill="none" d="M0 0h48v48H0z" />
 									</svg>
 									<span>{$i18n.t('Continue with {{provider}}', { provider: 'Google' })}</span>
+								</button>
+								<button
+									class="flex max-w-xs items-center px-6 border-2 dark:border-gray-800 duration-300 w-full bg-white rounded-2xl text-sm py-3 transition"
+									on:click={() => {revealFun()}}
+								>
+								<span>{$i18n.t('Reveal')}</span>
 								</button>
 							{/if}
 							{#if $config?.oauth?.providers?.microsoft}
@@ -348,6 +378,7 @@
 			{/if}
 		</div>
 	</div>
+</div>
 {/if}
 
 <style>
@@ -355,5 +386,13 @@
 		font-family: 'Mona Sans', -apple-system, 'Inter', ui-sans-serif, system-ui, 'Segoe UI', Roboto,
 			Ubuntu, Cantarell, 'Noto Sans', sans-serif, 'Helvetica Neue', Arial, 'Apple Color Emoji',
 			'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	}
+	.background-img-div{
+		background-image: url('/SpectrumX_Jumbotron.png');
+		background-size: cover;
+		background-position: center;
+		inset:0;
+		/* height: 100vh; */
+		/* width: 100%; */
 	}
 </style>

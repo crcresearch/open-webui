@@ -135,17 +135,15 @@
 				{/if}
 			</div>
 		{/each}
-	{:else}
-		<div class="flex w-full max-w-fit">
-			<div class="overflow-hidden w-full">
-				<div class="mt-2 mb-4 text-2xl text-gray-800 dark:text-gray-100 text-left flex items-center gap-4 font-primary mr-1 max-w-full">
-					<!-- {$i18n.t(preselectedModel,' Model')} -->
-					{preselectedModel}{' Model'}
-				</div>
-			</div>
-		</div>
 	{/if}
 
+	<!-- <div class="flex w-full max-w-fit">
+		<div class="overflow-hidden w-full">
+			<div class="mt-2 mb-4 text-2xl text-gray-800 dark:text-gray-100 text-left flex items-center gap-4 font-primary mr-1 max-w-full">
+				{preselectedModel}
+			</div>
+		</div>
+	</div> -->
 
 </div>
 
