@@ -34,7 +34,7 @@ services:
       -  WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
       - 'WEBUI_AUTH_TRUSTED_EMAIL_HEADER=X-Forwarded-Email'
       - 'WEBUI_AUTH_TRUSTED_NAME_HEADER=X-Forwarded-User'
-      -  DATABASE_URL=
+      -  DATABASE_URL=${DATABASE_URL}
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
@@ -51,6 +51,7 @@ services:
       OAUTH2_PROXY_CLIENT_SECRET: ${OAUTH2_PROXY_CLIENT_SECRET}
       OAUTH2_PROXY_REDIRECT_URL: ${OAUTH2_PROXY_REDIRECT_URL}
       OAUTH2_PROXY_COOKIE_SECURE: "false"
+      DATABASE_URL: ${DATABASE_URL}
     restart: unless-stopped
     ports:
       - 4180:4180/tcp

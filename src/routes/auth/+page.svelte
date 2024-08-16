@@ -136,20 +136,7 @@
 	<!-- <div class=" bg-white dark:bg-gray-950 min-h-screen w-full flex justify-center font-primary"> -->
 	<div class="relative">
 	<div class="background-img-div w-full h-full bg-cover">
-		<!-- <div class="hidden lg:flex lg:flex-1 px-10 md:px-16 w-full bg-yellow-50 justify-center">
-			<div class=" my-auto pb-16 text-left">
-				<div>
-					<div class=" font-semibold text-yellow-600 text-4xl">
-						{$i18n.t('Get up and running with')} <br /> {$i18n.t('large language models, locally.')}
-					</div>
-
-					<div class="mt-2 text-yellow-600 text-xl">
-						{$i18n.t('Run Llama 2, Code Llama, and other models. Customize and create your own.')}
-					</div>
-				</div>
-			</div>
-		</div> -->
-
+		
 		<div class="w-full sm:max-w-md px-10 min-h-screen flex flex-col text-center">
 			{#if ($config?.features.auth_trusted_header ?? false) || $config?.features.auth === false}
 				<div class=" my-auto pb-10 w-full">
@@ -180,14 +167,12 @@
 							<div class="mb-1">
 								<div class=" text-2xl font-medium">
 									{mode === 'signin' ? $i18n.t('Sign in') : $i18n.t('Sign up')}
-									{$i18n.t('to SpectrumX')}
 									{$WEBUI_NAME}
 								</div>
 
 								{#if mode === 'signup'}
 									<div class=" mt-1 text-xs font-medium text-gray-500">
 										ⓘ {$WEBUI_NAME}
-										{'SpectrumX'}
 										{$i18n.t(
 											'does not make any external connections, and your data stays securely on your locally hosted server.'
 										)}
@@ -289,7 +274,7 @@
 						<div class="absolute inset-x-0 bottom-13 flex flex-col max-w-md mx-auto items-center space-y-2">
 							{#if $config?.oauth?.providers?.google}
 								<button
-									class="flex max-w-xs items-center px-6 border-2 dark:border-gray-800 duration-300 bg-white light:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 w-full rounded-2xl dark:text-white text-sm py-3 transition"
+									class="flex max-w-xs items-center px-6 border-2 dark:border-gray-800 duration-300 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 w-full rounded-2xl dark:text-white text-sm py-3 transition"
 									on:click={() => {
 										window.location.href = `${WEBUI_BASE_URL}/oauth/google/login`;
 									}}
@@ -311,12 +296,12 @@
 									</svg>
 									<span>{$i18n.t('Continue with {{provider}}', { provider: 'Google' })}</span>
 								</button>
-								<button
+								<!-- <button
 									class="flex max-w-xs items-center px-6 border-2 dark:border-gray-800 duration-300 w-full bg-white rounded-2xl text-sm py-3 transition"
 									on:click={() => {revealFun()}}
 								>
 								<span>{$i18n.t('Reveal')}</span>
-								</button>
+								</button> -->
 							{/if}
 							{#if $config?.oauth?.providers?.microsoft}
 								<button
@@ -378,8 +363,9 @@
 			{/if}
 		</div>
 	</div>
-</div>
-{/if}
+
+	</div>
+	{/if}
 
 <style>
 	.font-mona {

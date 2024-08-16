@@ -314,7 +314,7 @@ JWT_EXPIRES_IN = PersistentConfig(
 ENABLE_OAUTH_SIGNUP = PersistentConfig(
     "ENABLE_OAUTH_SIGNUP",
     "oauth.enable_signup",
-    os.environ.get("ENABLE_OAUTH_SIGNUP", "False").lower() == "true",
+    os.environ.get("ENABLE_OAUTH_SIGNUP", "True").lower() == "true",
 )
 
 OAUTH_MERGE_ACCOUNTS_BY_EMAIL = PersistentConfig(
@@ -1358,12 +1358,14 @@ AUDIO_TTS_VOICE = PersistentConfig(
 # Database
 ####################################
 
-DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DATA_DIR}/webui.db")
-# Replace the postgres:// with postgresql://
-if "postgres://" in DATABASE_URL:
+# DATABASE_URL = os.environ.get("DATABASE_URL", f"sqlite:///{DATA_DIR}/webui.db")
+# # Replace the postgres:// with postgresql://
+# if "postgres://" in DATABASE_URL:
+#     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
+
+
+DATABASE_URL = os.environ.get("DATABASE_URL", "")
+
+# DATABASE_URL = 'postgresql://postgres:postgres@localhost:5432/openwebui'
+if "postgresql://" in DATABASE_URL:
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")
-
-
-# DATABASE_URL = os.environ.get("DATABASE_URL", "")
-# if "postgresql://" in DATABASE_URL:
-    # DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://")

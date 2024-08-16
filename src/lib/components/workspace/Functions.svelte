@@ -412,7 +412,7 @@
 
 <div class=" my-16">
 	<div class=" text-lg font-semibold mb-3 line-clamp-1">
-		{$i18n.t('Made by OpenWebUI Community')}
+		{$i18n.t('Modified for SpectrumX by University of Notre Dame Center for Research Computing')}
 	</div>
 
 	<a
